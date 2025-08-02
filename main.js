@@ -3,33 +3,33 @@
 
 
 window.addEventListener('DOMContentLoaded', () => {
-  fetch('fpp.csv?v=' + Date.now())  // força recarregar o arquivo (cache busting)
-    .then(response => {
-      if (!response.ok) throw new Error(`Erro HTTP: ${response.status}`);
-      const contentType = response.headers.get("Content-Type");
-      return contentType.includes("text") ? response.text() : response.arrayBuffer();
-    })
-    .then(data => {
-      const isText = typeof data === "string";
-      const workbook = XLSX.read(isText ? data : new Uint8Array(data), {
-        type: isText ? "string" : "array"
-      });
-
+  fetch('fpp.csv')
+    .then(response => response.arrayBuffer())
+    .then(buffer => {
+      const workbook = XLSX.read(buffer, { type: 'array' });
       const sheet = workbook.Sheets[workbook.SheetNames[0]];
       const json = XLSX.utils.sheet_to_json(sheet, { defval: 0 }).map(row => {
         const cleanRow = {};
+
         for (let key in row) {
           let val = row[key];
           if (typeof val === 'string') {
-            try { val = decodeURIComponent(escape(val)); } catch {}
+            try {
+              // Corrige textos com acento que vieram quebrados (ex: MÃ³veis → Móveis)
+              val = decodeURIComponent(escape(val));
+            } catch (e) {
+              // em caso de erro, mantém valor original
+            }
           }
           cleanRow[key] = val;
         }
 
+        // Corrige erro comum: TARGERT → TARGET
         if ('TARGERT' in cleanRow && !('TARGET' in cleanRow)) {
           cleanRow['TARGET'] = cleanRow['TARGERT'];
           delete cleanRow['TARGERT'];
         }
+
         return cleanRow;
       });
 
@@ -38,10 +38,11 @@ window.addEventListener('DOMContentLoaded', () => {
       filtrarPorSemanaFpp();
     })
     .catch(error => {
-      console.error('❌ Erro ao carregar ou processar o CSV:', error);
-      alert("Não foi possível carregar o arquivo fpp.csv. Verifique o nome, a extensão e se ele está publicado no repositório.");
+      console.error('Erro ao carregar o arquivo da pasta /data:', error);
     });
 });
+
+
 
 
 
