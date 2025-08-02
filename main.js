@@ -573,7 +573,7 @@ const zonaIconMap = {
   "Transferência": "transferencia.png",
   "MZ": "mz.png",
   "MU": "mu.png",
-  "RK": "rk.png"
+  "RK": "rk.png",
   "RS": "rs.png"
 };
 
