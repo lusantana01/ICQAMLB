@@ -3,7 +3,7 @@
 
 
 window.addEventListener('DOMContentLoaded', () => {
-  fetch('data/fpp.csv')
+  fetch('fpp.csv')
     .then(response => response.arrayBuffer())
     .then(buffer => {
       const workbook = XLSX.read(buffer, { type: 'array' });
