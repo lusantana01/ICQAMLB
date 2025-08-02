@@ -163,7 +163,7 @@ function renderZonaImpacto(baseZona) {
     const zonaKey = z.MELI;
     const valor = parseFloat(z.TARGERT).toFixed(1);
 
-    const imgPath = `icons/${zonaKey.toLowerCase().replace(/[^a-z0-9_-]/g, '_')}.png`;
+    const imgPath = `${zonaKey.toLowerCase().replace(/[^a-z0-9_-]/g, '_')}.png`;
 
     const card = document.createElement("div");
     card.className = "zona-card";
@@ -573,7 +573,7 @@ function renderZonaImpacto(semanaSelecionada) {
       .replace(/_+/g, '_')
       .replace(/^_|_$/g, '') + ".png";
 
-    const iconePath = `icons/${imagem}`;
+    const iconePath = `${imagem}`;
 
     div.innerHTML = `
       <img src="${iconePath}" class="zona-icon" onerror="this.style.display='none'">
@@ -662,7 +662,7 @@ function renderImpactoPorCategoria(semanaSelecionada) {
   .replace(/^_|_$/g, '') // remove underlines nas pontas
   + ".png";
 
-    const iconePath = `icons/${imagem}`;
+    const iconePath = `${imagem}`;
 
     div.innerHTML = `
       <img src="${iconePath}" class="categoria-icon" onerror="this.style.display='none'">
