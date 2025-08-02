@@ -569,7 +569,7 @@ function renderZonaImpacto(semanaSelecionada) {
       .replace(/_+/g, '_')
       .replace(/^_|_$/g, '') + ".png";
 
-    const iconePath = `icons/${imagem}`;
+    const iconePath = `${imagem}`;
 
 
     div.innerHTML = `
