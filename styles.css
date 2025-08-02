@@ -446,58 +446,28 @@ body {
     .wow-vermelho { color: #c62828; font-weight: bold; }
 
     .wow-verde { color: #2e7d32; font-weight: bold; }
+.section,
+.section-title {
+  word-wrap: break-word;
+}
+
 @media screen and (max-width: 768px) {
-  header {
+  .section {
+    margin: 12px;
+    padding: 16px;
+  }
+
+  .dpmo-total {
+    font-size: 20px;
     flex-direction: column;
-    gap: 8px;
     text-align: center;
   }
 
-  .fpp-e-sku-layout,
-  .tendencia-categoria-wrapper {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .dpmo-table-wrapper {
-    flex-direction: column;
-    padding-left: 0;
-  }
-
-  .dpmo-column {
-    max-width: 100%;
-    margin-bottom: 20px;
-  }
-
-  .sku-card-layout {
-    grid-template-columns: 1fr !important;
-  }
-
-  .zona-card,
-  .categoria-card {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .comentario-final-wrapper {
-    padding: 12px;
-  }
-
-  .section-title {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 6px;
-  }
-
-  .zona-icon,
-  .categoria-icon {
-    width: 48px;
-    height: 48px;
-  }
-
-  .grafico-mini {
-    max-width: 100%;
-    padding: 0;
+  .dpmo-header,
+  .dpmo-row {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    font-size: 12px;
   }
 }
+
+
