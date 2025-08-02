@@ -567,6 +567,7 @@ const zonaIconMap = {
   "MZ": "mz.png",
   "MU": "mu.png",
   "RK": "rk.png"
+  "RS": "rs.png"
 };
 
 const imagem = zona
