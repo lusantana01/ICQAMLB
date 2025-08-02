@@ -444,30 +444,4 @@ body {
 
 
     .wow-vermelho { color: #c62828; font-weight: bold; }
-
     .wow-verde { color: #2e7d32; font-weight: bold; }
-.section,
-.section-title {
-  word-wrap: break-word;
-}
-
-@media screen and (max-width: 768px) {
-  .section {
-    margin: 12px;
-    padding: 16px;
-  }
-
-  .dpmo-total {
-    font-size: 20px;
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .dpmo-header,
-  .dpmo-row {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    font-size: 12px;
-  }
-}
-
-
