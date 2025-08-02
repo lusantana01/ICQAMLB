@@ -4,9 +4,9 @@
 
 window.addEventListener('DOMContentLoaded', () => {
   fetch('fpp.csv')
-    .then(response => response.arrayBuffer())
-    .then(buffer => {
-      const workbook = XLSX.read(buffer, { type: 'array' });
+    .then(response => response.text())
+    .then(data => {
+      const workbook = XLSX.read(data, { type: 'string' });
       const sheet = workbook.Sheets[workbook.SheetNames[0]];
       const json = XLSX.utils.sheet_to_json(sheet, { defval: 0 }).map(row => {
         const cleanRow = {};
@@ -15,16 +15,12 @@ window.addEventListener('DOMContentLoaded', () => {
           let val = row[key];
           if (typeof val === 'string') {
             try {
-              // Corrige textos com acento que vieram quebrados (ex: MÃ³veis → Móveis)
               val = decodeURIComponent(escape(val));
-            } catch (e) {
-              // em caso de erro, mantém valor original
-            }
+            } catch (e) {}
           }
           cleanRow[key] = val;
         }
 
-        // Corrige erro comum: TARGERT → TARGET
         if ('TARGERT' in cleanRow && !('TARGET' in cleanRow)) {
           cleanRow['TARGET'] = cleanRow['TARGERT'];
           delete cleanRow['TARGERT'];
@@ -38,9 +34,10 @@ window.addEventListener('DOMContentLoaded', () => {
       filtrarPorSemanaFpp();
     })
     .catch(error => {
-      console.error('Erro ao carregar o arquivo da pasta /data:', error);
+      console.error('❌ Erro ao carregar o CSV:', error);
     });
 });
+
 
 
 function renderSkuCardPanel(semanaSelecionada) {
