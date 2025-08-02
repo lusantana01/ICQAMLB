@@ -447,6 +447,12 @@ body {
 
     .wow-verde { color: #2e7d32; font-weight: bold; }
 @media screen and (max-width: 768px) {
+  header {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+
   .fpp-e-sku-layout,
   .tendencia-categoria-wrapper {
     flex-direction: column;
@@ -460,22 +466,38 @@ body {
 
   .dpmo-column {
     max-width: 100%;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
   }
 
   .sku-card-layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
   }
 
   .zona-card,
   .categoria-card {
     flex-direction: column;
-    text-align: center;
     align-items: center;
+    text-align: center;
   }
 
-  header {
+  .comentario-final-wrapper {
+    padding: 12px;
+  }
+
+  .section-title {
     flex-direction: column;
-    gap: 8px;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .zona-icon,
+  .categoria-icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .grafico-mini {
+    max-width: 100%;
+    padding: 0;
   }
 }
