@@ -564,9 +564,9 @@ function renderZonaImpacto(semanaSelecionada) {
     }
 const zonaIconMap = {
   "Transferência": "transferencia.png",
-  "MZ": "MZ.png",
-  "MU": "MU.png",
-  "RK": "RK.png"
+  "MZ": "mz.png",
+  "MU": "mu.png",
+  "RK": "rk.png"
 };
 
 const imagem = zona
@@ -577,6 +577,7 @@ const imagem = zona
   .replace(/^_|_$/g, '') + ".png";
 
 const iconePath = zonaIconMap[zona] || imagem;
+
 
 
 
