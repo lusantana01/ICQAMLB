@@ -3,20 +3,25 @@
 
 
 window.addEventListener('DOMContentLoaded', () => {
-  fetch('fpp.csv')
-    .then(response => response.text())
+  fetch('fpp.csv?v=' + Date.now())  // força recarregar o arquivo (cache busting)
+    .then(response => {
+      if (!response.ok) throw new Error(`Erro HTTP: ${response.status}`);
+      const contentType = response.headers.get("Content-Type");
+      return contentType.includes("text") ? response.text() : response.arrayBuffer();
+    })
     .then(data => {
-      const workbook = XLSX.read(data, { type: 'string' });
+      const isText = typeof data === "string";
+      const workbook = XLSX.read(isText ? data : new Uint8Array(data), {
+        type: isText ? "string" : "array"
+      });
+
       const sheet = workbook.Sheets[workbook.SheetNames[0]];
       const json = XLSX.utils.sheet_to_json(sheet, { defval: 0 }).map(row => {
         const cleanRow = {};
-
         for (let key in row) {
           let val = row[key];
           if (typeof val === 'string') {
-            try {
-              val = decodeURIComponent(escape(val));
-            } catch (e) {}
+            try { val = decodeURIComponent(escape(val)); } catch {}
           }
           cleanRow[key] = val;
         }
@@ -25,7 +30,6 @@ window.addEventListener('DOMContentLoaded', () => {
           cleanRow['TARGET'] = cleanRow['TARGERT'];
           delete cleanRow['TARGERT'];
         }
-
         return cleanRow;
       });
 
@@ -34,9 +38,11 @@ window.addEventListener('DOMContentLoaded', () => {
       filtrarPorSemanaFpp();
     })
     .catch(error => {
-      console.error('❌ Erro ao carregar o CSV:', error);
+      console.error('❌ Erro ao carregar ou processar o CSV:', error);
+      alert("Não foi possível carregar o arquivo fpp.csv. Verifique o nome, a extensão e se ele está publicado no repositório.");
     });
 });
+
 
 
 
