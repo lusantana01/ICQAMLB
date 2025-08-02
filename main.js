@@ -562,21 +562,14 @@ function renderZonaImpacto(semanaSelecionada) {
     } else if (wow < 0) {
       wowTexto = `<span class="wow-verde">🔻 ${wowAbs}% WoW</span>`;
     }
-   const zonaIconMap = {
-  "MZ": "mz.png",
-  "MU": "mu.png",
-  "RK": "rk.png",
-  "Transferência": "transferencia.png"
-};
+    const imagem = zona
+      .toLowerCase()
+      .normalize("NFD").replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-z0-9]/g, '_')
+      .replace(/_+/g, '_')
+      .replace(/^_|_$/g, '') + ".png";
 
-const imagem = zona
-  .toLowerCase()
-  .normalize("NFD").replace(/[\u0300-\u036f]/g, '')
-  .replace(/[^a-z0-9]/g, '_')
-  .replace(/_+/g, '_')
-  .replace(/^_|_$/g, '') + ".png";
-
-const iconePath = zonaIconMap[zona] || imagem;
+    const iconePath = `icons/${imagem}`;
 
 
     div.innerHTML = `
