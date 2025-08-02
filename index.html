@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>On Page MLB - Dinâmico</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+</head>
+<body>
+  <header>
+    <div>
+      <img src="https://http2.mlstatic.com/frontend-assets/ml-web-navigation/ui-navigation/6.3.0/mercadolibre/logo__large_plus.png" alt="Logo ML">
+      <span style="margin-left: 12px;">One Page | MLB</span>
+    </div>
+    <div>Week <strong id="weekDisplay">30</strong></div>
+  </header>
+
+  <section id="visualizacao">
+    <div id="indicadores">
+      <div class="section" id="section-fpp">
+        <div class="section-title">
+          <div>FPP DPMO</div>
+          <div>
+            <label style="margin-right: 1px; font-weight: 500;">Filtro Week:</label>
+            <select id="semanaSelectFpp" onchange="filtrarPorSemanaFpp()"></select>
+            
+          </div>
+        </div>
+
+        <div class="fpp-e-sku-layout">
+          <div id="fppTabelaContainer" class="fpp-tabela"></div>
+          <div id="painelSkuCards">
+            <div class="section-title">📦 Produtos de Maior Impacto por FC</div>
+            <div id="skuCardWrapper" class="sku-card-layout"></div>
+          </div>
+        </div>
+
+        <div class="tendencia-categoria-wrapper">
+          <!-- Tendência por FC -->
+          <div class="tendencia-bloco">
+            <div class="section-title">📈 Tendência por FC (ultimas 4 semanas)</div>
+            <div id="justificativasContainer"></div>
+          </div>
+
+          <!-- Impacto por Categoria -->
+          <div class="categoria-bloco">
+            <div class="section-title">📊 Impacto por Categoria</div>
+            <div id="impactoCategoriaContainer"></div>
+
+            <!-- Zonas de maior impacto -->
+            <div class="zona-wrapper">
+              <div class="section-title">🏭 Zonas de Maior Impacto</div>
+              <div id="zonaImpactoContainer" class="zona-card-grid"></div>
+            </div>
+
+            <!-- Comentário -->
+            <div class="comentario-final-wrapper">
+              <div class="section-title">📝 Conclusão Geral da Semana</div>
+              <div style="margin-bottom: 10px;">
+                <button onclick="gerarComentarioAutomatico()" class="btn-gerar">Gerar Comentário Automático</button>
+              </div>
+              <div id="blocoComentario">
+                <textarea id="comentarioGeral" placeholder="Digite sua conclusão da semana..."></textarea>
+                <button onclick="salvarComentario()">Salvar Comentário</button>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="js/main.js" defer></script>
+
+</body>
+</html>
